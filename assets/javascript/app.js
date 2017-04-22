@@ -32,48 +32,83 @@ function displayTrivia () {
 
 } 
 
-$(".answerChoices").on("click", function(){
+$(document).on("click", ".answerChoices", function(){
 
-	
+	var clickChoice = $(this).text(); 
+
+	console.log(clickChoice); 
+
+	if (clickChoice === correctAnswers[count]) {
+
+		reset(); 
+
+		count++; 
+
+		displayTrivia();
+
+
+	} else { 
+
+		$("#answer1").empty();
+
+		$("#correctAnswer").append("<h3>Incorrect!</h3>");
+
+		$("#correctAnswer").append("The correct answer is "+correctAnswers[count]+"!"); 
+
+		setTimeout (function(){$("#correctAnswer").empty()}, 3000); 
+
+		reset (); 
+
+		count ++;
+
+		setTimeout (displayTrivia, 3000);
+
+		
+
+	}
 
 
 }); 
 
 
+// Timer
 
-
-// Increment to next questions and answers. 
-
-// function next () {
-
-// 	count++;
-
-// 	setTimeout (displayTrivia, 1000); 
-
-// }
-
-// function startTrivia () {
-
-// 	showQuestion = setInterval (next, 16000); 
-
-// }
-
-// Timers and intervals
 
 var number = 16; 
 
 var intervalId;
 
-function run () {
-	intervalId = setInterval(decrement, 1000); 
-}
+	function run () {
+		intervalId = setInterval(decrement, 1000); 
+	}
 
-// Function to track how much time user has left to respond. 
+	// Function to track how much time user has left to respond. 
 
-function decrement () {
-	number--; 
-	$("#timer").html("<h2>" + number + "</h2>"); 
-}
+	function decrement () {
+		number--; 
+
+		$("#timer").html("<h2>" + number + "</h2>"); 
+	}
+
+	function stop () {
+
+		clearInterval(intervalId); 
+	}
+
+
+	// Reset Function 
+
+	function reset () {
+
+		stop (); 
+	 
+		 number = 16;
+
+		 $("#answer1").empty(); 
+
+
+	}
+
 
 
 
