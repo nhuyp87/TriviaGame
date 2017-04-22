@@ -80,6 +80,8 @@ var intervalId;
 
 	function run () {
 		intervalId = setInterval(decrement, 1000); 
+
+
 	}
 
 	// Function to track how much time user has left to respond. 
@@ -88,6 +90,26 @@ var intervalId;
 		number--; 
 
 		$("#timer").html("<h2>" + number + "</h2>"); 
+
+		if (number === 0 ) {
+
+			stop (); 
+
+			$("#answer1").empty();
+
+			$("#correctAnswer").append("<h3>Time's Up!</h3>");
+			
+			$("#correctAnswer").append("The correct answer is "+correctAnswers[count]+"!");
+
+			setTimeout (function(){$("#correctAnswer").empty()}, 3000); 
+
+			reset (); 
+
+			count ++;
+
+			setTimeout (displayTrivia, 3000);
+
+		}
 	}
 
 	function stop () {
