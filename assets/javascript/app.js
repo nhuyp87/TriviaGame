@@ -88,7 +88,7 @@ function run () {
 // Function to track how much time user has left to respond. 
 function decrement () {
 	number--; 
-	$("#timer").html("<h2>" + number + "</h2>"); 
+	$("#timer").html("<h3> Time Remaining: " + number + "</h3>"); 
 	if (number === 0 ) {
 		timeOut ();
 	}
@@ -163,6 +163,7 @@ function end () {
 	$("#question").empty(); 
 	$("#answer1").empty();
 	$("#correctAnswer").empty(); 
+	$("#timer").empty(); 
 
 	// Display score. 
 	$("#score").append("<p>Correct: " + correct+ "</p>"); 
