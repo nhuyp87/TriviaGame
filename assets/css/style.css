@@ -1,5 +1,5 @@
 body {
-	background: url("../images/background.jpg");
+	background: url("../images/background2.jpg");
 }
 
 #game {
@@ -12,21 +12,44 @@ body {
 
 
 #title1 {
-	font-family: 'Exo', sans-serif;
+	font-family: 'Asar', serif;
 	font-size: 80px;
 	text-align: center;
 	color: black;
 }
 
-#title2 {
-	font-family: 'Pacifico', cursive;
-	font-size: 40px;
-	letter-spacing: 4px;
-	position: absolute;
-	top: 30px;
-	left: 200px;
-	color: black;
-	text-shadow: 0 0 3px white;
-	font-style: italic;
+#musicTitle {
+	font-family: 'Allura', cursive;
+	font-size: 80px;
+	font-style: bold italic;
+
 }
+
+ #timer, #question, #answer1, #score, #correctAnswer {
+
+	font-family: 'Arya', sans-serif;
+	margin-left: 60px;
+}
+
+#question, #score {
+	font-size: 24px;
+	font-style: bold; 
+}
+
+#answer1 {
+	font-size: 18px;
+	position: relative;
+	left: 10px;
+}
+
+#start {
+	position: relative;
+	top: 100px;
+	left: 420px;
+	font-size: 50px;
+}
+
+
+
+
 
