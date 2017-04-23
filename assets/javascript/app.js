@@ -27,6 +27,8 @@ $ ("#start").click(displayTrivia);
 // Function to display various questions and answers. 
 function displayTrivia () {
 
+	$("#score").empty(); 
+	
 	// Hide "start" 
 	$ ("#start").hide(); 
 
@@ -43,6 +45,7 @@ function displayTrivia () {
 
 	} else {
 		end ();
+
 		reload ();  
 	}
 
@@ -177,6 +180,8 @@ function end () {
 	$("#start").html ("<h3>Restart?</h3>")
 	$("#start").show(); 
 
+	
+
 
 }
 
@@ -190,7 +195,6 @@ function reload () {
 	incorrect = 0; 
 	timeUp = 0; 
 
-	$("#score").empty(); 
 
 }
 
