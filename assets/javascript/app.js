@@ -12,6 +12,12 @@ var showQuestion;
 
 var count = 0; 
 
+var correct = 0;
+
+var incorrect = 0; 
+
+var timeUp = 0; 
+
 
 
 
@@ -21,77 +27,120 @@ $ ("#start").click(displayTrivia);
 // Function to display various questions and answers. 
 function displayTrivia () {
 
-	$("#question").html("<p>" + questions[count] + "</p>");
+	// Hide "start" 
+	$ ("#start").hide(); 
 
-	for (var i=0; i< answers[count].length; i++) {
+	// if the count is less than 3 then display questions and answers, if count is greater than 3 then run "end" function 
+	if (count < 3) {
+		$("#question").html("<p>" + questions[count] + "</p>");
+		for (var i=0; i< answers[count].length; i++) {
+		console.log(answers[count].length);
 		$("#answer1").append("<p class='answerChoices'>"+ answers[count][i] + "</p>"); 
+
 	}; 
 
 	run();
 
+	} else {
+		end (); 
+	}
 
 } 
 
+// Evaluate user choices. 
 $(document).on("click", ".answerChoices", function(){
 
 	var clickChoice = $(this).text(); 
 
 	console.log(clickChoice); 
 
+	// If choice is correct...
 	if (clickChoice === correctAnswers[count]) {
-
-		reset(); 
-
-		count++; 
-
-		displayTrivia();
+		correctAns (); 
+	} 
 
 
-	} else { 
-
-		$("#answer1").empty();
-
-		$("#correctAnswer").append("<h3>Incorrect!</h3>");
-
-		$("#correctAnswer").append("The correct answer is "+correctAnswers[count]+"!"); 
-
-		setTimeout (function(){$("#correctAnswer").empty()}, 3000); 
-
-		reset (); 
-
-		count ++;
-
-		setTimeout (displayTrivia, 3000);
-
-		
-
+	else { 
+	// If choice is incorrect. 
+		incorrectAns (); 
 	}
 
 
 }); 
 
 
+
+
 // Timer
-
-
 var number = 16; 
 
 var intervalId;
 
-	function run () {
-		intervalId = setInterval(decrement, 1000); 
+function run () {
+	intervalId = setInterval(decrement, 1000); 
+
+}
+
+// Function to track how much time user has left to respond. 
+
+function decrement () {
+	number--; 
+
+	$("#timer").html("<h2>" + number + "</h2>"); 
+
+	if (number === 0 ) {
+
+		timeOut (); 
 
 
 	}
+}
 
-	// Function to track how much time user has left to respond. 
+function stop () {
 
-	function decrement () {
-		number--; 
+	clearInterval(intervalId); 
+}
 
-		$("#timer").html("<h2>" + number + "</h2>"); 
 
-		if (number === 0 ) {
+// Reset Function - when next question needs to be displayed. 
+
+	function reset () {
+		stop (); 
+		 number = 16;
+		 $("#answer1").empty(); 
+	}
+
+
+// Correct Answer Function
+
+	function correctAns () {
+		correct++; 
+		reset(); 
+		count++; 
+		displayTrivia();
+	}
+
+
+// Incorrect Answer Function
+
+	function incorrectAns () {
+		incorrect++; 
+		$("#answer1").empty();
+		$("#correctAnswer").append("<h3>Incorrect!</h3>");
+		$("#correctAnswer").append("The correct answer is "+correctAnswers[count]+"!"); 
+		setTimeout (function(){$("#correctAnswer").empty()}, 3000); 
+		reset (); 
+		count ++;
+		setTimeout (displayTrivia, 3000);
+	}
+
+
+
+// Time Out Condition
+
+	function timeOut () {
+
+			timeUp++ 
 
 			stop (); 
 
@@ -109,27 +158,29 @@ var intervalId;
 
 			setTimeout (displayTrivia, 3000);
 
-		}
 	}
 
-	function stop () {
+// Show user how many questions they answered correctly, incorrectly, and timed out on. 
 
-		clearInterval(intervalId); 
-	}
+function end () {
+	// Empty divs. 
+	$("#question").empty(); 
+	$("#answer1").empty();
+	$("#correctAnswer").empty(); 
+
+	// Display score. 
+	$("#score").append("Correct: " + correct); 
+	$("#score").append("Incorrect: " + incorrect);
+	$("#score").append("Timed Out: " + timeUp);
+
+}
 
 
-	// Reset Function 
-
-	function reset () {
-
-		stop (); 
-	 
-		 number = 16;
-
-		 $("#answer1").empty(); 
 
 
-	}
+
+
+
 
 
 
