@@ -42,7 +42,8 @@ function displayTrivia () {
 	run();
 
 	} else {
-		end (); 
+		end ();
+		reload ();  
 	}
 
 } 
@@ -162,6 +163,7 @@ function stop () {
 
 // Show user how many questions they answered correctly, incorrectly, and timed out on. 
 
+
 function end () {
 	// Empty divs. 
 	$("#question").empty(); 
@@ -169,12 +171,28 @@ function end () {
 	$("#correctAnswer").empty(); 
 
 	// Display score. 
-	$("#score").append("Correct: " + correct); 
-	$("#score").append("Incorrect: " + incorrect);
-	$("#score").append("Timed Out: " + timeUp);
+	$("#score").append("<p>Correct: " + correct+ "</p>"); 
+	$("#score").append("<p>Incorrect: " + incorrect+ "</p>");
+	$("#score").append("<p>Timed Out: " + timeUp+ "</p>");
+	$("#start").html ("<h3>Restart?</h3>")
+	$("#start").show(); 
+
 
 }
 
+
+// Function to reload game. 
+
+function reload () {
+
+	count = 0; 
+	correct = 0;
+	incorrect = 0; 
+	timeUp = 0; 
+
+	$("#score").empty(); 
+
+}
 
 
 
